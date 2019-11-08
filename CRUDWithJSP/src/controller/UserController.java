@@ -29,7 +29,7 @@ public class UserController extends HttpServlet {
 		String forward="";
 		String action = request.getParameter("action");
 		
-		if(action.equalsIgnoreCase("detele")) {
+		if(action.equalsIgnoreCase("delete")) {
 			int id = Integer.parseInt(request.getParameter("id"));
 			dao.DeleteUser(id);
 			forward= LIST_USER;
