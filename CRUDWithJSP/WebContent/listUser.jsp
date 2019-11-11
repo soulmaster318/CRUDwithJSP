@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-<table border=1 width="60%">
+<table border=1>
 	<thead>
 		<tr>
 			<th>User ID</th>

@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-
+import java.util.regex.*;
 
 
 
@@ -19,6 +19,7 @@ public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String INSERT_OR_EDIT = "/user.jsp";
 	private static String LIST_USER = "/listUser.jsp";
+	
 	private UserDAO dao;
 	
 	public UserController() {
@@ -56,11 +57,32 @@ public class UserController extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
 		UserInfo user = new UserInfo();
-		user.setFirstname(request.getParameter("firstname"));
-		user.setLastname(request.getParameter("lastname"));
-		user.setCountry(request.getParameter("country"));
-		user.setPhoneno(request.getParameter("phone"));
+		String firstname=request.getParameter("firstname");
+		String lastname=request.getParameter("lastname");
+		String country=request.getParameter("country");
+		String phone = request.getParameter("phone");
+		
+		user.setFirstname(firstname);
+		user.setLastname(lastname);
+		user.setCountry(country);
+		user.setPhoneno(phone);
 		String uid=request.getParameter("id");
+		if(firstname.length() >20 || !firstname.matches("^[\\w.-]+$")) {
+			response.sendRedirect("validate_error_firstname.jsp");
+			return;
+		}
+		if(lastname.length() >20 || !lastname.matches("^[\\w.-]+$")) {
+			response.sendRedirect("validate_error_lastname.jsp");
+			return;
+		}
+		if(country.length() >100 || !country.matches("^[\\w.-]+$")) {
+			response.sendRedirect("validate_error_country.jsp");
+			return;
+		}
+		if(!phone.matches("^[0][1-9]+$") || phone.length() !=10) {
+			response.sendRedirect("validate_error_phone.jsp");
+			return;
+		}
 		if(uid==""||uid==null) {
 			dao.AddUser(user);
 		}
