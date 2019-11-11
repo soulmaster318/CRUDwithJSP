@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1> ERROR!</h1>
-	<p>First Name can only contain word and number characters and no more than 20 characters!!</p>
+	<p>Address can only contain word and number characters and no more than 100 characters!!</p>
 </body>
 </html>

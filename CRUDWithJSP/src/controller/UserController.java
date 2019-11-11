@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.regex.*;
 
 
 
@@ -57,6 +56,7 @@ public class UserController extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
 		UserInfo user = new UserInfo();
+		int errorcount = 0;
 		String firstname=request.getParameter("firstname");
 		String lastname=request.getParameter("lastname");
 		String country=request.getParameter("country");
@@ -68,19 +68,27 @@ public class UserController extends HttpServlet {
 		user.setPhoneno(phone);
 		String uid=request.getParameter("id");
 		if(firstname.length() >20 || !firstname.matches("^[\\w.-]+$")) {
-			response.sendRedirect("validate_error_firstname.jsp");
-			return;
+			request.setAttribute("error_message1","First name must have less than 20 chars and not contain any special characters!!");
+			errorcount+=1;
+			
 		}
 		if(lastname.length() >20 || !lastname.matches("^[\\w.-]+$")) {
-			response.sendRedirect("validate_error_lastname.jsp");
-			return;
+			request.setAttribute("error_message2","Last name must have less than 20 chars and not contain any special characters!!");
+			errorcount+=1;
+			
 		}
 		if(country.length() >100 || !country.matches("^[\\w.-]+$")) {
-			response.sendRedirect("validate_error_country.jsp");
-			return;
+			request.setAttribute("error_message3","Address must have less than 20 chars and not contain any special characters!!");
+			errorcount+=1;
+			
 		}
 		if(!phone.matches("^[0][1-9]+$") || phone.length() !=10) {
-			response.sendRedirect("validate_error_phone.jsp");
+			request.setAttribute("error_message4","Phone number must start with '0' and only numbers are allowed and it must have 10 character ");
+			errorcount+=1;
+			
+		}
+		if (errorcount>=1) {
+			request.getRequestDispatcher("/user.jsp").forward(request, response);
 			return;
 		}
 		if(uid==""||uid==null) {

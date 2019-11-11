@@ -24,7 +24,13 @@
     </table>
     <input
             type="submit" value="Submit" />
+            <p>${error_message1}</p>
+            <p>${error_message2}</p>
+            <p>${error_message3}</p>
+            <p>${error_message4}</p>
             </div>
+            
+            
 </form>
 </body>
 </html>
