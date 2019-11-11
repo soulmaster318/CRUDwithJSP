@@ -7,25 +7,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <title>Add new user</title>
 </head>
 <body>
 <form method="POST" action='UserController' name="frmAddUser">
-	ID: <input type="text" readonly="readonly" name="id" value="<c:out value="${user.id}"/>" <br/>>
-	First name: <input
-            type="text" name="firstname"
-            value="<c:out value="${user.firstname}" />" /> <br /> 
-    Last Name : <input
-            type="text" name="lastname"
-            value="<c:out value="${user.lastname}" />" /> <br />
-    Address : <input
-            type="text" name="country"
-            value="<c:out value="${user.country}" />" /> <br />
-    Phone number : <input
-            type="text" name="phone"
-            value="<c:out value="${user.phoneno}" />" /> <br />
-            <input
+	<div class="container">
+	<h1>Add User Form</h1>
+	<input type="hidden" readonly="readonly" name="id" value="<c:out value="${user.id}"/>">
+	<table><tr><td>First name:</td><td> <input            type="text" name="firstname"            value="<c:out value="${user.firstname}" />" /> </td></tr>
+	<tr><td>Last Name :</td><td><input type="text" name="lastname"     value="<c:out value="${user.lastname}" />" /></td></tr> 
+    <tr><td>Address :</td><td><input  type="text" name="country"      value="<c:out value="${user.country}" />" /></td></tr>  
+    <tr><td>Phone number :</td><td><input type="text" name="phone"   value="<c:out value="${user.phoneno}" />" /></td></tr> 
+     
+            
+    </table>
+    <input
             type="submit" value="Submit" />
+            </div>
 </form>
 </body>
 </html>

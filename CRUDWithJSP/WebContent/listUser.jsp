@@ -8,9 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Show users</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-<table border=1>
+<table border=1 class="container">
 	<thead>
 		<tr>
 			<th>User ID</th>
@@ -36,6 +37,6 @@
 		</c:forEach>
 	</tbody>
 </table>
-<p><a href="UserController?action=insert">Add user</a></p>
+<p ><a href="UserController?action=insert">Add user</a></p>
 </body>
 </html>
