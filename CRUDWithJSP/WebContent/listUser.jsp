@@ -11,7 +11,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-<table border=1 class="container">
+<div class="container">
+<table border=1 width="60%">
 	<thead>
 		<tr>
 			<th>User ID</th>
@@ -38,5 +39,6 @@
 	</tbody>
 </table>
 <p ><a href="UserController?action=insert">Add user</a></p>
+</div>
 </body>
 </html>
