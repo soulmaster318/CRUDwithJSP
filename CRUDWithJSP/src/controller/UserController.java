@@ -82,7 +82,7 @@ public class UserController extends HttpServlet {
 			errorcount+=1;
 			
 		}
-		if(!phone.matches("^[0][1-9]+$") || phone.length() !=10) {
+		if(!phone.matches("^[0][0-9]+$") || phone.length() !=10) {
 			request.setAttribute("error_message4","Phone number must start with '0' and only numbers are allowed and it must have 10 character ");
 			errorcount+=1;
 			
