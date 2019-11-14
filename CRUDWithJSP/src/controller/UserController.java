@@ -4,11 +4,14 @@ import java.io.IOException;
 
 
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import entity.UserInfo;
 import dao.UserDAO;
@@ -37,7 +40,7 @@ public class UserController extends HttpServlet {
 			request.setAttribute("users", dao.getAllUsers());
 		}
 		else if (action.equalsIgnoreCase("edit")) {
-			forward= INSERT_OR_EDIT;
+			forward= "/updateUser.jsp";
 			int id = Integer.parseInt(request.getParameter("id"));
 			UserInfo user = dao.SelectUserByID(id);
 			request.setAttribute("user", user);
@@ -57,16 +60,21 @@ public class UserController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException{
 		UserInfo user = new UserInfo();
 		int errorcount = 0;
+		String email=request.getParameter("email");
+		String password=request.getParameter("password");
 		String firstname=request.getParameter("firstname");
 		String lastname=request.getParameter("lastname");
 		String country=request.getParameter("country");
 		String phone = request.getParameter("phone");
-		
-		user.setFirstname(firstname);
-		user.setLastname(lastname);
-		user.setCountry(country);
-		user.setPhoneno(phone);
-		String uid=request.getParameter("id");
+		if(!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")) {
+			request.setAttribute("error_message5","Password must contain at least 1 upper case, 1 lower case, 1 digit, no space and at least 8 characters!!");
+			errorcount+=1;
+			
+		}
+		if(!email.matches("^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$")) {
+			request.setAttribute("error_messag65","Invalid email!!");
+			errorcount+=1;
+		}
 		if(firstname.length() >20 || !firstname.matches("^[\\w.-]+$")) {
 			request.setAttribute("error_message1","First name must have less than 20 chars and not contain any special characters!!");
 			errorcount+=1;
@@ -91,6 +99,16 @@ public class UserController extends HttpServlet {
 			request.getRequestDispatcher("/user.jsp").forward(request, response);
 			return;
 		}
+		String hash = BCrypt.hashpw(password, BCrypt.gensalt());
+		
+		user.setEmail(email);
+		user.setPassword(hash);
+		user.setFirstname(firstname);
+		user.setLastname(lastname);
+		user.setCountry(country);
+		user.setPhoneno(phone);
+		String uid=request.getParameter("id");
+		
 		if(uid==""||uid==null) {
 			dao.AddUser(user);
 		}
@@ -98,8 +116,8 @@ public class UserController extends HttpServlet {
 			user.setId(Integer.parseInt(uid));
 			dao.UpdateUser(user);
 		}
-		RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
-        request.setAttribute("users", dao.getAllUsers());
+		RequestDispatcher view = request.getRequestDispatcher("/homeView.jsp");
+        request.setAttribute("success", "User added successfully!!");
         view.forward(request, response);
 	}
 

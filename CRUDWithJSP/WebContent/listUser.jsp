@@ -16,29 +16,30 @@
 	<thead>
 		<tr>
 			<th>User ID</th>
+			<th>Email</th>
 			<th>First Name</th>
 			<th>Last name</th>
 			<th>Address</th>
 			<th>Phone number</th>
-			<th colspan=2>Action</th>
+			
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${users}" var="user">
 			<tr>
 				<td><c:out value="${user.id}" /></td>
+				<td><c:out value="${user.email}" /></td>
                	<td><c:out value="${user.firstname}" /></td>
                 <td><c:out value="${user.lastname}" /></td>
                 <td><c:out value="${user.country}" /></td>
-                <td><c:out value="${user.phoneno}" /></td>
-                <td><a href="UserController?action=edit&id=<c:out value="${user.id}"/>">Update</a></td>
-                <td><a href="UserController?action=delete&id=<c:out value="${user.id}"/>">Delete</a></td>
+                <td><c:out value="${user.phoneno}" /></td>                
 			</tr>
 		
 		</c:forEach>
 	</tbody>
 </table>
 <p ><a href="UserController?action=insert">Add user</a></p>
+<p><a href="homeView.jsp">Home</a>
 </div>
 </body>
 </html>

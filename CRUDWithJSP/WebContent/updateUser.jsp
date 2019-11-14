@@ -8,16 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<title>Add new user</title>
 </head>
 <body>
 <form method="POST" action='UserController' name="frmAddUser">
 	<div class="container">
-	<h1>Add User Form</h1>
+	<h1>Update User Form</h1>
 	<input type="hidden" readonly="readonly" name="id" value="<c:out value="${user.id}"/>">
 	<table>
-	<tr><td>Email:</td><td> <input            type="text" name="email"            value="<c:out value="${user.email}" />" /> </td></tr>
-	<tr><td>Password:</td><td> <input            type="password" name="password"            value="<c:out value="${user.password}" />" /> </td></tr>
+	<tr><td>Email:</td><td> <input     readonly="readonly"       type="text" name="email"            value="<c:out value="${user.email}" />" /> </td></tr>
+	<tr><td>Password:</td><td> <input       type="password" name="password"            value="<c:out value="${user.password}" />" /> </td></tr>
 	<tr><td>First name:</td><td> <input            type="text" name="firstname"            value="<c:out value="${user.firstname}" />" /> </td></tr>
 	<tr><td>Last Name :</td><td><input type="text" name="lastname"     value="<c:out value="${user.lastname}" />" /></td></tr> 
     <tr><td>Address :</td><td><input  type="text" name="country"      value="<c:out value="${user.country}" />" /></td></tr>  
